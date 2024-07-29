@@ -1,0 +1,3 @@
+WINDOWS= "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
+
+DEBIAN= "/usr/bin/google-chrome"

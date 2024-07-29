@@ -1,0 +1,33 @@
+{
+  "name": "emailscrapper",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node run.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^5.16.2",
+    "amqplib": "^0.10.4",
+    "appwrite": "^15.0.0",
+    "axios": "^1.7.2",
+    "child_process": "^1.0.2",
+    "chromedriver": "^120.0.1",
+    "dotenv": "^16.4.5",
+    "dropbox": "^10.34.0",
+    "form-data": "^4.0.0",
+    "isomorphic-fetch": "^3.0.0",
+    "proxy-chain": "^2.4.1",
+    "puppeteer": "^21.6.1",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "top-user-agents": "^2.0.6",
+    "unique-random-array": "^3.0.0",
+    "user-agents": "^1.1.67"
+  }
+}

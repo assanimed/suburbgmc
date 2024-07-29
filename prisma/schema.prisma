@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                       Int      @id @default(autoincrement())
+  userId                   Int      @unique
+  type                     String
+  provider                 String
+  providerAccountId        String
+  refresh_token            String?  @db.Text
+  access_token             String?  @db.Text
+  expires_at               Int?
+  token_type               String?
+  scope                    String?
+  id_token                 String?  @db.Text
+  session_state            String?
+  refresh_token_expires_in Int?
+  createdAt                DateTime @default(now())
+  updatedAt                DateTime
+  User                     User     @relation(fields: [userId], references: [id])
+
+  @@unique([provider, providerAccountId])
+  @@index([userId])
+}
+
+model Process {
+  id        Int            @id @default(autoincrement())
+  title     String
+  slug      String
+  url       String         @db.Text
+  status    Process_status @default(PENDING)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime
+  csv_files csv_files?
+}
+
+model User {
+  id            Int       @id @default(autoincrement())
+  name          String?
+  email         String?   @unique
+  username      String?   @unique
+  password      String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime
+  role          User_role @default(USER)
+  emailVerified DateTime?
+  image         String?
+  Account       Account?
+}
+
+model csv_files {
+  id        Int     @id @default(autoincrement())
+  url       String
+  processId Int     @unique
+  Process   Process @relation(fields: [processId], references: [id])
+}
+
+model file_upload_token {
+  id    Int     @id @default(autoincrement())
+  token String  @unique
+  valid Boolean @default(true)
+}
+
+enum Process_status {
+  PENDING
+  COMPLETE
+  INPROGRESS
+}
+
+enum User_role {
+  ADMIN
+  USER
+}
